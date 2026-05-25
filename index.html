@@ -68,16 +68,7 @@
         .admin-toggle:checked { background-color: #10b981; border-color: #10b981; }
         .admin-toggle:checked::after { transform: translateX(100%); border-color: white; }
     </style>
-    <style>
-  .anim-glow {
-    animation: glow-effect 2s infinite ease-in-out;
-  }
-  @keyframes glow-effect { 
-    0%, 100% { filter: drop-shadow(0 0 2px #FF0000); } 
-    50% { filter: drop-shadow(0 0 8px #FF0000); } 
-  }
-</style>
-
+    
 </head>
 <body class="text-gray-800 dark:text-gray-200 antialiased h-[100dvh] w-screen overflow-hidden flex justify-center sm:items-center">
 
@@ -746,7 +737,7 @@
                 // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (প্রোফাইল কার্ডের জন্য)
                 const verifyBadge = userProfile.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" class="anim-glow">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
     <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
   </svg>
@@ -845,7 +836,7 @@
                     // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (সার্চ রেজাল্টের জন্য)
                     const verifiedIcon = u.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" class="anim-glow">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
     <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
   </svg>
@@ -958,15 +949,109 @@
             } catch(er) { showToast(er.message, "error"); } finally { btn.innerHTML = og; }
         });
 
-        const renderSOSList = () => {
-            const list = document.getElementById('sos-list'); list.innerHTML = '';
-            const todayLocal = new Date(); todayLocal.setHours(0, 0, 0, 0); 
+        // Ensure you have imported 'query', 'orderBy', 'where' from firebase-firestore
+import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, serverTimestamp, addDoc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-            const active = allRequests.filter(r => {
-                if(r.status !== 'active') return false;
-                if(r.date) { const reqDate = new Date(r.date); if(reqDate < todayLocal) return false; }
-                return true;
+// ... existing code ...
+
+const setupListeners = () => {
+    if (!currentUser) return;
+    if (unsubUsers) unsubUsers();
+    if (unsubRequests) unsubRequests();
+
+    if (currentUser.uid === ADMIN_UID) {
+        document.getElementById('nav-admin').classList.remove('hidden');
+    }
+
+    // Listener for Users
+    unsubUsers = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), (snapshot) => {
+        allUsers = [];
+        snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            data.uid = docSnap.id;
+            allUsers.push(data);
+            if (docSnap.id === currentUser.uid) {
+                userProfile = data;
+                updateProfileUI();
+            }
+        });
+        document.getElementById('stat-donors').innerText = allUsers.filter(u => u.isAvailable).length;
+        renderLeaderboard();
+        if (!document.getElementById('view-admin').classList.contains('hidden')) renderAdminPanel();
+    });
+
+    // Refactored Listener for SOS Requests
+    const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'requests'), orderBy('timestamp', 'desc'));
+    
+    unsubRequests = onSnapshot(q, (snapshot) => {
+        allRequests = [];
+        snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            data.id = docSnap.id;
+            allRequests.push(data);
+        });
+
+        // Debugging log to confirm data population
+        console.log("Current SOS Requests Array:", allRequests);
+
+        if (!isInitialReqLoad) {
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === "added" && change.doc.data().status === 'active') {
+                    document.getElementById('notif-badge').classList.remove('hidden');
+                    latestNewRequestData = change.doc.data();
+                }
             });
+        }
+        isInitialReqLoad = false;
+
+        document.getElementById('stat-sos').innerText = allRequests.filter(req => req.status === 'active').length;
+        updateTicker();
+        renderSOSList();
+    }, (err) => console.error("Snapshot Error:", err));
+};
+
+const renderSOSList = () => {
+    const list = document.getElementById('sos-list');
+    if (!list) return; // Safety check
+    
+    list.innerHTML = '';
+    const todayLocal = new Date();
+    todayLocal.setHours(0, 0, 0, 0);
+
+    // Filtering active status
+    const active = allRequests.filter(r => r.status === 'active');
+
+    if (active.length === 0) {
+        list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`;
+        return;
+    }
+
+    active.forEach(r => {
+        const time = r.timestamp?.toMillis ? new Date(r.timestamp.toMillis()).toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }) : 'এখন';
+        
+        list.innerHTML += `
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-rose-100 dark:border-rose-900/30 relative overflow-hidden">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex justify-center items-center shadow-lg shadow-primary/30 font-bold text-lg">${r.bloodGroup || ''}</div>
+                        <div><h3 class="font-bold text-sm">${r.patient || 'N/A'}</h3><p class="text-[11px] text-gray-500">পোস্ট: ${time}</p></div>
+                    </div>
+                    <span class="bg-rose-100 text-primary dark:bg-rose-900/50 dark:text-rose-400 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse-slow">${r.bags || 1} ব্যাগ</span>
+                </div>
+                <div class="space-y-1.5 mb-4 text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                    <p><i class="fa-solid fa-notes-medical w-4"></i> <strong>সমস্যা:</strong> ${r.reason || 'উল্লেখ নেই'}</p>
+                    <p><i class="fa-regular fa-calendar w-4"></i> <strong>তারিখ:</strong> ${r.date || 'N/A'}</p>
+                    <p><i class="fa-regular fa-clock w-4"></i> <strong>সময়:</strong> ${r.donationTime || 'N/A'}</p>
+                    <p><i class="fa-regular fa-hospital w-4"></i> <strong>স্থান:</strong> ${r.hospital || 'N/A'}</p>
+                </div>
+                <div class="flex gap-2">
+                    <a href="tel:${(r.phone || '').replace(/[^0-9+]/g, '')}" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl text-center text-sm shadow-md flex justify-center items-center gap-2 transition-colors"><i class="fa-solid fa-phone"></i> কল করুন</a>
+                    ${currentUser && r.createdBy === currentUser.uid ? `<button onclick="markSOSDone('${r.id}')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-bold py-2.5 rounded-xl text-sm transition-colors text-gray-700 dark:text-gray-300">সম্পন্ন হয়েছে</button>` : ''}
+                </div>
+            </div>`;
+    });
+};
+
 
             if(!active.length) { list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`; return; }
             active.forEach(r => {
@@ -1021,7 +1106,7 @@
                 // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (লিডারবোর্ডের জন্য)
                 const verifiedIcon = u.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" class="anim-glow">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
     <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
   </svg>
