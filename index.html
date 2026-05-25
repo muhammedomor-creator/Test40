@@ -189,7 +189,7 @@
 
             <section id="view-profile" class="view-section hidden p-6 space-y-6 animate-fade-in">
                 <div class="text-center">
-                    <div class="w-24 h-24 mx-auto bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-4xl text-gray-400 mb-3 shadow-inner relative overflow-hidden">
+                    <div class="w-24 h-24 mx-auto bg-gray-200 dark:bg-gray-200 rounded-full flex items-center justify-center text-4xl text-gray-400 mb-3 shadow-inner relative overflow-hidden">
                         <i class="fa-solid fa-user" id="profile-default-icon"></i>
                         <img id="profile-img" src="" class="hidden w-full h-full object-cover">
                         <div id="profile-blood-badge" class="absolute bottom-0 w-full bg-primary text-white text-xs font-bold py-1 hidden"></div>
@@ -689,18 +689,25 @@
                 if (!document.getElementById('view-admin').classList.contains('hidden')) renderAdminPanel();
             }, (err) => console.error(err));
 
+            // Refactored SOS requests listener
             unsubRequests = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'requests'), (snapshot) => {
                 allRequests = []; 
                 snapshot.forEach(docSnap => {
-                    const data = docSnap.data(); data.id = docSnap.id; allRequests.push(data);
+                    const data = docSnap.data(); 
+                    data.id = docSnap.id; 
+                    allRequests.push(data);
                 });
+                
+                // Debugging output requested by user
+                console.log("SOS data array updated (allRequests):", allRequests);
                 
                 if (!isInitialReqLoad) {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
                             const newReq = change.doc.data();
                             if(newReq.status === 'active') {
-                                document.getElementById('notif-badge').classList.remove('hidden');
+                                const badge = document.getElementById('notif-badge');
+                                if (badge) badge.classList.remove('hidden');
                                 latestNewRequestData = newReq;
                             }
                         }
@@ -708,10 +715,20 @@
                 }
                 isInitialReqLoad = false;
 
-                allRequests.sort((a, b) => (b.timestamp?.toMillis() || Date.now()) - (a.timestamp?.toMillis() || Date.now()));
-                document.getElementById('stat-sos').innerText = allRequests.filter(req => req.status === 'active').length;
-                updateTicker(); renderSOSList();
-            }, (err) => console.error(err));
+                // Sort by timestamp in descending order with fallback for transient client states
+                allRequests.sort((a, b) => {
+                    const timeA = a.timestamp?.toMillis ? a.timestamp.toMillis() : Date.now();
+                    const timeB = b.timestamp?.toMillis ? b.timestamp.toMillis() : Date.now();
+                    return timeB - timeA;
+                });
+
+                const activeCount = allRequests.filter(req => req.status === 'active').length;
+                const statSos = document.getElementById('stat-sos');
+                if (statSos) statSos.innerText = activeCount;
+
+                updateTicker(); 
+                renderSOSList();
+            }, (err) => console.error("Error listening to requests: ", err));
         };
 
         const updateProfileUI = () => {
@@ -734,7 +751,6 @@
                 
                 document.getElementById('digital-donor-card').classList.remove('hidden');
                 
-                // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (প্রোফাইল কার্ডের জন্য)
                 const verifyBadge = userProfile.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
@@ -833,7 +849,6 @@
                 res.forEach(u => {
                     const b = getBadge(u.points || 0);
                     
-                    // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (সার্চ রেজাল্টের জন্য)
                     const verifiedIcon = u.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
@@ -949,109 +964,57 @@
             } catch(er) { showToast(er.message, "error"); } finally { btn.innerHTML = og; }
         });
 
-        // Ensure you have imported 'query', 'orderBy', 'where' from firebase-firestore
-import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, serverTimestamp, addDoc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Refactored renderSOSList function
+        const renderSOSList = () => {
+            const list = document.getElementById('sos-list'); 
+            if (!list) return;
+            list.innerHTML = '';
+            const todayLocal = new Date(); 
+            todayLocal.setHours(0, 0, 0, 0); 
 
-// ... existing code ...
-
-const setupListeners = () => {
-    if (!currentUser) return;
-    if (unsubUsers) unsubUsers();
-    if (unsubRequests) unsubRequests();
-
-    if (currentUser.uid === ADMIN_UID) {
-        document.getElementById('nav-admin').classList.remove('hidden');
-    }
-
-    // Listener for Users
-    unsubUsers = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), (snapshot) => {
-        allUsers = [];
-        snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            data.uid = docSnap.id;
-            allUsers.push(data);
-            if (docSnap.id === currentUser.uid) {
-                userProfile = data;
-                updateProfileUI();
-            }
-        });
-        document.getElementById('stat-donors').innerText = allUsers.filter(u => u.isAvailable).length;
-        renderLeaderboard();
-        if (!document.getElementById('view-admin').classList.contains('hidden')) renderAdminPanel();
-    });
-
-    // Refactored Listener for SOS Requests
-    const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'requests'), orderBy('timestamp', 'desc'));
-    
-    unsubRequests = onSnapshot(q, (snapshot) => {
-        allRequests = [];
-        snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            data.id = docSnap.id;
-            allRequests.push(data);
-        });
-
-        // Debugging log to confirm data population
-        console.log("Current SOS Requests Array:", allRequests);
-
-        if (!isInitialReqLoad) {
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === "added" && change.doc.data().status === 'active') {
-                    document.getElementById('notif-badge').classList.remove('hidden');
-                    latestNewRequestData = change.doc.data();
+            // Filters active requests securely and verifies older ones gracefully
+            const active = allRequests.filter(r => {
+                if(r.status !== 'active') return false;
+                if(r.date) { 
+                    const reqDate = new Date(r.date); 
+                    if (!isNaN(reqDate.getTime()) && reqDate < todayLocal) return false; 
                 }
+                return true;
             });
-        }
-        isInitialReqLoad = false;
 
-        document.getElementById('stat-sos').innerText = allRequests.filter(req => req.status === 'active').length;
-        updateTicker();
-        renderSOSList();
-    }, (err) => console.error("Snapshot Error:", err));
-};
+            if(!active.length) { 
+                list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`; 
+                return; 
+            }
 
-const renderSOSList = () => {
-    const list = document.getElementById('sos-list');
-    if (!list) return; // Safety check
-    
-    list.innerHTML = '';
-    const todayLocal = new Date();
-    todayLocal.setHours(0, 0, 0, 0);
+            active.forEach(r => {
+                const time = r.timestamp?.toMillis ? new Date(r.timestamp.toMillis()).toLocaleTimeString('bn-BD', {hour:'2-digit', minute:'2-digit'}) : 'এখন';
+                const reasonUI = r.reason ? `<p><i class="fa-solid fa-notes-medical w-4"></i> <strong>সমস্যা:</strong> ${r.reason}</p>` : '';
+                const exactTimeUI = r.donationTime ? `<p><i class="fa-regular fa-clock w-4"></i> <strong>সময়:</strong> ${r.donationTime}</p>` : '';
+                const safePhone = r.phone ? r.phone.replace(/[^0-9+]/g, '') : '';
 
-    // Filtering active status
-    const active = allRequests.filter(r => r.status === 'active');
-
-    if (active.length === 0) {
-        list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`;
-        return;
-    }
-
-    active.forEach(r => {
-        const time = r.timestamp?.toMillis ? new Date(r.timestamp.toMillis()).toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }) : 'এখন';
-        
-        list.innerHTML += `
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-rose-100 dark:border-rose-900/30 relative overflow-hidden">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex justify-center items-center shadow-lg shadow-primary/30 font-bold text-lg">${r.bloodGroup || ''}</div>
-                        <div><h3 class="font-bold text-sm">${r.patient || 'N/A'}</h3><p class="text-[11px] text-gray-500">পোস্ট: ${time}</p></div>
-                    </div>
-                    <span class="bg-rose-100 text-primary dark:bg-rose-900/50 dark:text-rose-400 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse-slow">${r.bags || 1} ব্যাগ</span>
-                </div>
-                <div class="space-y-1.5 mb-4 text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
-                    <p><i class="fa-solid fa-notes-medical w-4"></i> <strong>সমস্যা:</strong> ${r.reason || 'উল্লেখ নেই'}</p>
-                    <p><i class="fa-regular fa-calendar w-4"></i> <strong>তারিখ:</strong> ${r.date || 'N/A'}</p>
-                    <p><i class="fa-regular fa-clock w-4"></i> <strong>সময়:</strong> ${r.donationTime || 'N/A'}</p>
-                    <p><i class="fa-regular fa-hospital w-4"></i> <strong>স্থান:</strong> ${r.hospital || 'N/A'}</p>
-                </div>
-                <div class="flex gap-2">
-                    <a href="tel:${(r.phone || '').replace(/[^0-9+]/g, '')}" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl text-center text-sm shadow-md flex justify-center items-center gap-2 transition-colors"><i class="fa-solid fa-phone"></i> কল করুন</a>
-                    ${currentUser && r.createdBy === currentUser.uid ? `<button onclick="markSOSDone('${r.id}')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-bold py-2.5 rounded-xl text-sm transition-colors text-gray-700 dark:text-gray-300">সম্পন্ন হয়েছে</button>` : ''}
-                </div>
-            </div>`;
-    });
-};
-
+                list.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-rose-100 dark:border-rose-900/30 relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-primary text-white rounded-2xl flex justify-center items-center shadow-lg shadow-primary/30 font-bold text-lg">${r.bloodGroup || ''}</div>
+                                <div><h3 class="font-bold text-sm">${r.patient || 'বেনামী'}</h3><p class="text-[11px] text-gray-500">পোস্ট: ${time}</p></div>
+                            </div>
+                            <span class="bg-rose-100 text-primary dark:bg-rose-900/50 dark:text-rose-400 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse-slow">${r.bags || 1} ব্যাগ</span>
+                        </div>
+                        <div class="space-y-1.5 mb-4 text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                            ${reasonUI}
+                            <p><i class="fa-regular fa-calendar w-4"></i> <strong>তারিখ:</strong> ${r.date || 'N/A'}</p>
+                            ${exactTimeUI}
+                            <p><i class="fa-regular fa-hospital w-4"></i> <strong>স্থান:</strong> ${r.hospital || 'N/A'}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="tel:${safePhone}" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl text-center text-sm shadow-md flex justify-center items-center gap-2 transition-colors"><i class="fa-solid fa-phone"></i> কল করুন</a>
+                            ${r.createdBy === (currentUser?.uid || '') ? `<button onclick="markSOSDone('${r.id}')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-bold py-2.5 rounded-xl text-sm transition-colors text-gray-700 dark:text-gray-300">সম্পন্ন হয়েছে</button>` : ''}
+                        </div>
+                    </div>`;
+            });
+        };
 
         window.markSOSDone = async (reqId) => {
             try { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'requests', reqId), { status: 'completed' }); showToast("সম্পন্ন মার্ক করা হয়েছে।"); earnPoints(20, "রক্ত ম্যানেজ করার জন্য"); } catch(e) {}
@@ -1060,7 +1023,7 @@ const renderSOSList = () => {
         const updateTicker = () => {
             const t = document.getElementById('sos-ticker'), a = allRequests.filter(r => r.status === 'active').slice(0, 5);
             if(!a.length) { t.innerHTML = '<span class="mx-4"><i class="fa-solid fa-heart-pulse mr-1"></i> বর্তমানে কোনো জরুরি রক্তের প্রয়োজন নেই।</span>'; return; }
-            let h = ''; a.forEach(r => h += `<span class="mx-4 font-semibold"><i class="fa-solid fa-droplet animate-pulse-slow mr-1"></i> ${r.bloodGroup} প্রয়োজন ${r.hospital}-এ</span>   •   `);
+            let h = ''; a.forEach(r => h += `<span class="mx-4 font-semibold"><i class="fa-solid fa-droplet animate-pulse-slow mr-1"></i> ${r.bloodGroup} প্রয়োজন ${r.hospital}-এ</span>   •   `);
             t.innerHTML = h + h;
         };
 
@@ -1074,7 +1037,6 @@ const renderSOSList = () => {
             s.forEach((u, i) => {
                 const b = getBadge(u.points || 0), me = u.uid === currentUser.uid;
                 
-                // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (লিডারবোর্ডের জন্য)
                 const verifiedIcon = u.isVerified ? `
 <div style="display:inline-block; vertical-align:middle; margin-left:4px;">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
