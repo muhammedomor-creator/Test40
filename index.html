@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="bn" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>রক্তের টান - একটি জীবন বাঁচাতে, আমরা সবাই একসাথে</title>
+<meta name="description" content="রক্তের টান একটি জীবন বাঁচাতে, আমরা সবাই একসাথে। বিনামূল্যে রক্ত দাতা ও গ্রহীতার সাথে যোগাযোগ করুন।">
+
+<meta property="og:title" content="রক্তের টান">
+<meta property="og:description" content="একটি জীবন বাঁচাতে, আমরা সবাই একসাথে">
+<meta property="og:image" content="https://i.postimg.cc/Jn97DkMN/1774197899502-2.jpg">
+<meta property="og:type" content="website">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Hind Siliguri"', 'sans-serif'] },
+                    colors: {
+                        primary: '#e11d48', 'primary-dark': '#be123c',
+                    },
+                    borderRadius: { 'super': '40px' },
+                    boxShadow: { 'soft': '0 10px 40px -10px rgba(0,0,0,0.08)' },
+                    animation: {
+                        'ticker': 'ticker 20s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.2s ease-out',
+                    },
+                    keyframes: {
+                        ticker: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(-100%)' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f3f4f6; -webkit-tap-highlight-color: transparent; }
+        .dark body { background-color: #111827; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-effect { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.3); }
+        .dark .glass-effect { background: rgba(31, 41, 55, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+        .main-pb { padding-bottom: calc(85px + env(safe-area-inset-bottom, 16px)); }
+        .bottom-nav-item.active { color: #e11d48; }
+        .bottom-nav-item.active .nav-icon-container { background-color: #ffe4e6; transform: translateY(-5px); }
+        .dark .bottom-nav-item.active { color: #fb7185; }
+        .dark .bottom-nav-item.active .nav-icon-container { background-color: #4c0519; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #e11d48; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .badge-bronze { background: linear-gradient(135deg, #b87333, #e5a068); color: white; }
+        .badge-silver { background: linear-gradient(135deg, #9ca3af, #e5e7eb); color: #1f2937; }
+        .badge-gold { background: linear-gradient(135deg, #fbbf24, #fef08a); color: #78350f; }
+        .badge-platinum { background: linear-gradient(135deg, #3b82f6, #93c5fd); color: white; }
+        
+        .admin-toggle:checked { background-color: #10b981; border-color: #10b981; }
+        .admin-toggle:checked::after { transform: translateX(100%); border-color: white; }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200 antialiased h-[100dvh] w-screen overflow-hidden flex justify-center sm:items-center">
+
+    <div id="app-container" class="w-full h-[100dvh] sm:max-w-[480px] sm:h-[95dvh] sm:rounded-super sm:shadow-2xl bg-gray-50 dark:bg-gray-900 relative flex flex-col overflow-hidden transition-colors duration-300">
+        
+        <header class="glass-effect z-40 px-6 py-4 flex justify-between items-center sm:rounded-t-super shadow-sm">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/40 animate-pulse-slow">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900 dark:text-white leading-tight">রক্তের টান</h1>
+                    <p class="text-xs text-primary font-medium">জীবন বাঁচান</p>
+                </div>
+            </div>
+            <button id="notification-btn" class="relative p-2 text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+                <i class="fa-regular fa-bell text-xl"></i>
+                <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-primary rounded-full hidden border-2 border-white dark:border-gray-900"></span>
+            </button>
+        </header>
+
+        <div class="w-full bg-rose-100 dark:bg-rose-950/50 text-primary dark:text-rose-400 text-sm py-2 overflow-hidden flex items-center shadow-inner z-30">
+            <div class="min-w-max flex animate-ticker" id="sos-ticker">
+                <span class="mx-4"><i class="fa-solid fa-bolt mr-1"></i> লোড হচ্ছে...</span>
+            </div>
+        </div>
+
+        <main id="main-content" class="flex-1 overflow-y-auto no-scrollbar relative z-10 main-pb bg-gray-50 dark:bg-gray-900">
+            
+            <section id="view-home" class="view-section p-6 space-y-6 animate-fade-in">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft text-center border border-gray-100 dark:border-gray-700">
+                        <div class="text-3xl font-bold text-primary mb-1" id="stat-donors">--</div>
+                        <div class="text-xs text-gray-500 dark:border-gray-400">মোট রক্তদাতা</div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft text-center border border-gray-100 dark:border-gray-700">
+                        <div class="text-3xl font-bold text-primary mb-1" id="stat-sos">--</div>
+                        <div class="text-xs text-gray-500 dark:border-gray-400">লাইভ রিকোয়েস্ট</div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-[32px] p-6 shadow-soft border border-gray-100 dark:border-gray-700">
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-primary"></i> রক্তদাতা খুঁজুন
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">রক্তের গ্রুপ</label>
+                            <div class="grid grid-cols-4 gap-2" id="search-bg-grid"></div>
+                            <input type="hidden" id="search-bg-input">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 mb-1">বিভাগ</label>
+                                <select id="search-division" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-primary outline-none"><option value="">সকল বিভাগ</option></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 mb-1">জেলা</label>
+                                <select id="search-district" disabled class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-primary outline-none"><option value="">সকল জেলা</option></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">উপজেলা/থানা/পৌরসভা</label>
+                            <select id="search-upazila" disabled class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-primary outline-none"><option value="">সকল উপজেলা/পৌরসভা</option></select>
+                        </div>
+                        <button onclick="performSearch()" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-2xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-search"></i> খুঁজুন
+                        </button>
+                    </div>
+                </div>
+
+                <div id="search-results-container" class="hidden">
+                    <h3 class="text-md font-bold mb-3 flex justify-between items-center">
+                        ফলাফল <span id="search-count" class="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-full">0 জন</span>
+                    </h3>
+                    <div id="search-results-list" class="space-y-3"></div>
+                </div>
+            </section>
+
+            <section id="view-sos" class="view-section hidden p-6 space-y-4 animate-fade-in">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-xl font-bold"><i class="fa-solid fa-truck-medical text-primary mr-2"></i> জরুরি রক্তের প্রয়োজন</h2>
+                    <button onclick="openModal('modal-add-sos')" class="bg-primary text-white text-sm px-4 py-2 rounded-full shadow-md hover:bg-primary-dark transition-colors">
+                        <i class="fa-solid fa-plus mr-1"></i> পোস্ট করুন
+                    </button>
+                </div>
+                <div id="sos-list" class="space-y-4"><div class="flex justify-center py-10"><div class="loader"></div></div></div>
+            </section>
+
+            <section id="view-leaderboard" class="view-section hidden p-6 space-y-6 animate-fade-in">
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-[32px] p-6 shadow-soft relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-white/10 text-9xl"><i class="fa-solid fa-medal"></i></div>
+                    <div class="relative z-10">
+                        <h2 class="text-sm font-medium text-gray-300">আমার পয়েন্ট</h2>
+                        <div class="text-4xl font-bold my-1 flex items-baseline gap-2">
+                            <span id="my-points-display">0</span>
+                            <span class="text-sm font-normal text-gray-400" id="my-badge-display">Bronze</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">রক্তদান ও শেয়ার করে পয়েন্ট বাড়ান। <button onclick="shareApp()" class="text-primary hover:underline font-bold">শেয়ার করুন (+10)</button></p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy text-yellow-500"></i> টপ ভলান্টিয়ার্স</h2>
+                    <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-soft p-2" id="leaderboard-list">
+                         <div class="flex justify-center py-5"><div class="loader"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-banks" class="view-section hidden p-6 space-y-4 animate-fade-in">
+                <h2 class="text-xl font-bold"><i class="fa-solid fa-hospital text-primary mr-2"></i> ব্লাড ব্যাংক ডিরেক্টরি</h2>
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" id="bank-search-input" placeholder="ব্লাড ব্যাংকের নাম বা এলাকা খুঁজুন..." class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none shadow-sm">
+                </div>
+                <div id="banks-list" class="space-y-3 mt-4"></div>
+            </section>
+
+            <section id="view-profile" class="view-section hidden p-6 space-y-6 animate-fade-in">
+                <div class="text-center">
+                    <div class="w-24 h-24 mx-auto bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-4xl text-gray-400 mb-3 shadow-inner relative overflow-hidden">
+                        <i class="fa-solid fa-user" id="profile-default-icon"></i>
+                        <img id="profile-img" src="" class="hidden w-full h-full object-cover">
+                        <div id="profile-blood-badge" class="absolute bottom-0 w-full bg-primary text-white text-xs font-bold py-1 hidden"></div>
+                    </div>
+                    <h2 class="text-xl font-bold" id="profile-name-display">গেস্ট ইউজার</h2>
+                    <p class="text-sm text-gray-500 mb-3" id="profile-phone-display">ফোন নম্বর সেট করা নেই</p>
+                    
+                    <button id="btn-google-login" onclick="loginWithGoogle()" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold py-2.5 px-6 rounded-full shadow-sm flex items-center justify-center gap-2 mx-auto hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google"> Google দিয়ে লগইন
+                    </button>
+                </div>
+                <div class="mt-8 border-t pt-6 text-center">
+                    <button id="logout-btn-user" class="text-xs text-red-500 hover:text-red-700 underline cursor-pointer transition">
+                        লগ আউট (Log Out)
+                    </button>
+                </div>
+                
+
+                <div id="digital-donor-card" class="hidden mt-2 glass-effect rounded-[32px] p-5 shadow-soft border border-gray-200 dark:border-gray-700 relative overflow-hidden bg-gradient-to-br from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-800/30">
+                    <div class="absolute -right-6 -top-6 text-primary/10 text-8xl"><i class="fa-solid fa-id-card"></i></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-[10px] font-bold text-primary uppercase tracking-wider mb-1">Digital Donor Card</p>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white" id="card-name">--</h3>
+                                <p class="text-xs text-gray-500 mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i> <span id="card-location">--</span></p>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md shadow-primary/30" id="card-bg">--</div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-200/50 dark:border-gray-700/50 flex justify-between items-center">
+                            <span class="text-xs text-gray-500 font-medium">Rank Status</span>
+                            <span id="card-badge" class="text-xs font-bold px-2.5 py-1 rounded-full">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-gray-100 dark:border-gray-700 flex justify-between items-center mt-6">
+                    <div>
+                        <h3 class="font-bold text-sm">রক্তদাতা হিসেবে উপস্থিত</h3>
+                        <p class="text-xs text-gray-500">অন্যরা আপনাকে সার্চে খুঁজে পাবে</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="profile-visibility" class="sr-only peer" onchange="updateVisibility(this.checked)">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                    </label>
+                </div>
+
+                <button onclick="openModal('modal-edit-profile')" class="w-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-3 rounded-2xl transition-colors flex justify-center items-center gap-2 border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-pen-to-square"></i> প্রোফাইল আপডেট
+                </button>
+
+                <div class="bg-white dark:bg-gray-800 rounded-[32px] p-2 shadow-soft border border-gray-100 dark:border-gray-700">
+                    <div class="p-3 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
+                        <span class="text-sm font-medium flex items-center"><i class="fa-solid fa-moon w-6 text-center text-gray-400"></i> ডার্ক মোড</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="dark-mode-toggle" class="sr-only peer" onchange="toggleDarkMode(this.checked)">
+                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-800"></div>
+                        </label>
+                    </div>
+                    <a href="https://www.facebook.com/share/g/1C2EHncojX/" target="_blank" class="w-full text-left p-3 flex items-center text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-colors border-b border-gray-100 dark:border-gray-700">
+                        <i class="fa-brands fa-facebook w-6 text-center text-blue-500"></i> Our Facebook Group
+                    </a>
+                    <button onclick="openModal('modal-privacy')" class="w-full text-left p-3 flex items-center text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-colors border-b border-gray-100 dark:border-gray-700">
+                        <i class="fa-solid fa-shield-halved w-6 text-center text-gray-400"></i> Privacy Policy
+                    </button>
+                    <button onclick="openModal('modal-about')" class="w-full text-left p-3 flex items-center text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-colors">
+                        <i class="fa-solid fa-circle-info w-6 text-center text-gray-400"></i> আমাদের সম্পর্কে
+                    </button>
+                </div>
+            </section>
+
+            <section id="view-admin" class="view-section hidden p-6 space-y-4 animate-fade-in">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold"><i class="fa-solid fa-user-shield text-primary mr-2"></i> অ্যাডমিন প্যানেল</h2>
+                    <span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-sm">Secure</span>
+                </div>
+                
+                <div class="glass-effect overflow-hidden rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 relative z-10">
+                    <div class="overflow-x-auto no-scrollbar">
+                        <table class="w-full text-sm text-left whitespace-nowrap">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-100/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+                                <tr>
+                                    <th class="px-4 py-3 font-semibold">নাম ও ফোন</th>
+                                    <th class="px-4 py-3 font-semibold text-center">গ্রুপ</th>
+                                    <th class="px-4 py-3 font-semibold text-center">ভেরিফাইড?</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-donors-list" class="divide-y divide-gray-100 dark:divide-gray-700/50 bg-white/40 dark:bg-gray-800/40">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="glass-effect absolute bottom-0 w-full z-40 rounded-t-[24px] sm:rounded-b-super pb-safe shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)]">
+            <div class="flex justify-around items-center py-2 h-[72px]">
+                <button onclick="switchTab('home')" class="bottom-nav-item active flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-home">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5"><i class="fa-solid fa-magnifying-glass text-lg"></i></div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">খুঁজুন</span>
+                </button>
+                <button onclick="switchTab('sos')" class="bottom-nav-item flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-sos">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5 relative">
+                        <i class="fa-solid fa-truck-medical text-lg"></i><span id="nav-sos-badge" class="absolute top-0 right-0 w-2.5 h-2.5 bg-primary rounded-full hidden"></span>
+                    </div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">জরুরি</span>
+                </button>
+                <button onclick="switchTab('leaderboard')" class="bottom-nav-item flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-leaderboard">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5"><i class="fa-solid fa-ranking-star text-lg"></i></div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">র‍্যাংকিং</span>
+                </button>
+                <button onclick="switchTab('banks')" class="bottom-nav-item flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-banks">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5"><i class="fa-solid fa-hospital text-lg"></i></div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">ব্যাংক</span>
+                </button>
+                <button onclick="switchTab('profile')" class="bottom-nav-item flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-profile">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5"><i class="fa-solid fa-user text-lg"></i></div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">প্রোফাইল</span>
+                </button>
+                <button id="nav-admin" onclick="switchTab('admin')" class="bottom-nav-item hidden flex flex-col items-center flex-1 min-w-0 text-gray-400 transition-all" data-target="view-admin">
+                    <div class="nav-icon-container w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-0.5"><i class="fa-solid fa-user-shield text-lg"></i></div>
+                    <span class="text-[10px] font-medium truncate w-full text-center">অ্যাডমিন</span>
+                </button>
+            </div>
+        </nav>
+
+        <div id="toast-container" class="absolute top-20 left-0 w-full px-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+        <div id="modal-backdrop" class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+        <div id="modal-logout-confirm" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)] flex flex-col">
+            <div class="p-6 pb-safe text-center mt-4">
+                <div class="w-16 h-16 bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center text-red-500 text-3xl mx-auto mb-4"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Rokter Tan</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-8">আপনি কি নিশ্চিত যে আপনি লগ আউট করতে চান?</p>
+                <div class="flex gap-4 px-2">
+                    <button onclick="closeModal('modal-logout-confirm')" class="flex-1 py-3.5 rounded-2xl font-bold bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-colors">বাতিল করুন</button>
+                    <button id="confirm-logout-btn" class="flex-1 py-3.5 rounded-2xl font-bold bg-primary hover:bg-primary-dark text-white transition-colors shadow-lg shadow-primary/30 flex justify-center items-center">হ্যাঁ, লগ আউট</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-add-sos" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)] flex flex-col max-h-[90dvh]">
+            <div class="p-4 flex justify-center border-b border-gray-100 dark:border-gray-700"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
+            <div class="p-6 overflow-y-auto no-scrollbar pb-safe">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">নতুন রিকোয়েস্ট</h2>
+                    <button onclick="closeModal('modal-add-sos')" class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <form id="form-add-sos" class="space-y-4">
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">রোগীর নাম</label><input type="text" id="sos-patient" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">রোগীর রোগ বা সমস্যার বিবরণ</label><textarea id="sos-reason" rows="2" placeholder="যেমন: সিজার, থ্যালাসেমিয়া, এক্সিডেন্ট" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary resize-none"></textarea></div>
+
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-2">প্রয়োজনীয় রক্তের গ্রুপ</label><div class="grid grid-cols-4 gap-2" id="sos-bg-grid"></div><input type="hidden" id="sos-bg-input" required></div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">কত ব্যাগ রক্ত প্রয়োজন?</label><input type="number" id="sos-bags" value="1" min="1" max="10" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">তারিখ</label><input type="date" id="sos-date" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                    </div>
+
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">রক্তদানের সুনির্দিষ্ট সময়</label><input type="text" id="sos-time" placeholder="যেমন: সকাল ১০টা, আসরের পর" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">হাসপাতাল ও ঠিকানা</label><input type="text" id="sos-hospital" placeholder="যেমন: ঢাকা মেডিকেল কলেজ, ঢাকা" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">যোগাযোগের নম্বর</label><input type="tel" id="sos-phone" placeholder="01XXXXXXXXX" required pattern="[0-9]{11}" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                    <button type="submit" id="btn-submit-sos" class="w-full bg-primary text-white font-bold py-3.5 rounded-2xl shadow-lg mt-4 flex justify-center items-center gap-2 active:scale-95 transition-all">পোস্ট করুন</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-request-donor" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)] flex flex-col max-h-[90dvh]">
+            <div class="p-4 flex justify-center border-b border-gray-100 dark:border-gray-700"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
+            <div class="p-6 overflow-y-auto no-scrollbar pb-safe">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-paper-plane mr-2"></i>রক্তের জন্য অনুরোধ</h2>
+                    <button onclick="closeModal('modal-request-donor')" class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                      <form id="form-request-donor" class="space-y-4">
+    <input type="hidden" id="req-donor-uid">
+    <input type="hidden" id="req-donor-bg">
+    
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">রোগীর নাম</label>
+        <input type="text" id="patientName" placeholder="রোগীর নাম লিখুন" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">কত ব্যাগ রক্ত লাগবে?</label>
+        <input type="number" id="bags" placeholder="ব্যাগ সংখ্যা লিখুন" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">হাসপাতাল ও ঠিকানা</label>
+        <input type="text" id="hospital" placeholder="হাসপাতালের নাম ও ঠিকানা" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">আপনার সচল মোবাইল নম্বর</label>
+        <input type="tel" id="requesterPhone" placeholder="01XXXXXXXXX" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">রোগের বিবরণ</label>
+        <input type="text" id="patientReason" placeholder="যেমন: সিজার বা থ্যালাসেমিয়া" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <div class="flex flex-col">
+        <label class="text-xs font-bold text-gray-800 mb-1 ml-1">রক্তের প্রয়োজনীয় সময়</label>
+        <input type="text" id="donationTime" placeholder="যেমন: আজ রাত ৯টার আগে" class="w-full p-3 border-2 border-black rounded-xl focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none transition-all placeholder:text-xs placeholder:font-semibold placeholder:text-gray-600">
+    </div>
+
+    <button type="submit" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-green-700 transition-all">
+        অ্যাডমিনকে পাঠান
+    </button>
+</form>
+            </div>
+        </div>
+
+        <div id="modal-edit-profile" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)] flex flex-col max-h-[90dvh]">
+            <div class="p-4 flex justify-center border-b border-gray-100 dark:border-gray-700"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
+            <div class="p-6 overflow-y-auto no-scrollbar pb-safe">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">প্রোফাইল আপডেট</h2>
+                    <button onclick="closeModal('modal-edit-profile')" class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <form id="form-edit-profile" class="space-y-4">
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-1">আপনার নাম</label><input type="text" id="prof-name" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary"></div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">ফোন নম্বর</label>
+                        <input type="tel" id="prof-phone" required pattern="[0-9]{11}" placeholder="01XXXXXXXXX" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary">
+                        <p class="text-[10px] text-primary mt-1 font-medium">অবশ্যই আপনার হোয়াটসঅ্যাপ নম্বরটি প্রদান করুন।</p>
+                    </div>
+                    <div><label class="block text-xs font-semibold text-gray-500 mb-2">আপনার রক্তের গ্রুপ</label><div class="grid grid-cols-4 gap-2" id="prof-bg-grid"></div><input type="hidden" id="prof-bg-input" required></div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">সর্বশেষ রক্তদানের তারিখ (ঐচ্ছিক)</label>
+                        <input type="date" id="prof-last-donation" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary">
+                        <p class="text-[10px] text-gray-400 mt-1">গত ৯০ দিনের মধ্যে রক্ত দিলে আপনি সার্চে সাময়িকভাবে অদৃশ্য থাকবেন।</p>
+                    </div>
+
+                    <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
+                        <label class="block text-xs font-bold text-gray-800 dark:text-gray-200 mb-2">বর্তমান ঠিকানা</label>
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <div><select id="prof-division" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm outline-none focus:border-primary"><option value="">বিভাগ</option></select></div>
+                            <div><select id="prof-district" required disabled class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm outline-none focus:border-primary"><option value="">জেলা</option></select></div>
+                        </div>
+                        <div><select id="prof-upazila" required disabled class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 text-sm outline-none focus:border-primary"><option value="">উপজেলা/থানা/পৌরসভা</option></select></div>
+                    </div>
+                    <button type="submit" id="btn-submit-profile" class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white font-bold py-3.5 rounded-2xl shadow-lg mt-4 flex justify-center items-center gap-2 active:scale-95 transition-all">সংরক্ষণ করুন</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-privacy" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
+            <div class="p-6 pb-safe">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Privacy Policy</h2>
+                    <button onclick="closeModal('modal-privacy')" class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="py-4 space-y-4 text-sm text-gray-600 dark:text-gray-300">
+                    <div class="flex gap-3 items-start bg-rose-50 dark:bg-rose-900/20 p-4 rounded-2xl">
+                        <i class="fa-solid fa-shield-heart text-primary mt-1 text-xl"></i>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">Blood seekers cannot contact donors directly. Our Admin Panel will handle all communication to ensure donor privacy.</p>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-user-shield text-primary mt-1"></i>
+                        <p>When blood is needed, our official Admin Panel will contact the donor to coordinate the process.</p>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-lock text-primary mt-1"></i>
+                        <p>Donor privacy and security are our top priorities. No personal contact numbers are shared without consent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-about" class="custom-modal absolute bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-[40px] z-50 transform translate-y-full transition-transform duration-300 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
+             <div class="p-6 pb-safe">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">আমাদের সম্পর্কে</h2>
+                    <button onclick="closeModal('modal-about')" class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="text-center py-4">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3"><i class="fa-solid fa-droplet"></i></div>
+                    <h3 class="text-lg font-bold">রক্তের টান V4.1</h3>
+                    <p class="text-sm text-gray-500 mt-2">একটি অলাভজনক, স্বেচ্ছাসেবী রক্তদান প্ল্যাটফর্ম।</p>
+                    <a href="https://www.facebook.com/share/g/1C2EHncojX/" target="_blank" class="mt-4 inline-flex items-center gap-2 text-blue-600 font-bold bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full">
+                        <i class="fa-brands fa-facebook"></i> জয়েন করুন ফেসবুক গ্রুপে
+                    </a>
+                    <p class="text-xs text-gray-400 mt-6">Developed with ❤️ for Bangladesh.</p>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, serverTimestamp, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const ADMIN_UID = "YOUR_ADMIN_FIREBASE_UID_HERE"; 
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rokter-tan-v4';
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMHgHancA7i6lg6iNS9aF1-ezVCCauIvA",
+            authDomain: "rokter-tan.firebaseapp.com",
+            projectId: "rokter-tan",
+            storageBucket: "rokter-tan.firebasestorage.app",
+            messagingSenderId: "516974795629",
+            appId: "1:516974795629:web:8e1abdfa2d7d0f83201864",
+            measurementId: "G-73NB064BD8"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let userProfile = null;
+        let allUsers = [];
+        let allRequests = [];
+        let unsubUsers = null, unsubRequests = null;
+        let isInitialReqLoad = true;
+        let latestNewRequestData = null;
+
+        const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+        
+        const geoData = {
+            "Dhaka": { "Dhaka": ["Savar", "Dhamrai", "Keraniganj", "Nawabganj", "Dohar", "Mirpur", "Uttara", "Mohammadpur", "Gulshan", "Badda", "Motijheel"], "Gazipur": ["Sadar", "Kaliakair", "Kaliganj", "Kapasia", "Sreepur"], "Narayanganj": ["Sadar", "Araihazar", "Bandar", "Rupganj", "Sonargaon"], "Narsingdi": ["Sadar", "Belabo", "Monohardi", "Palash", "Raipura", "Shibpur"], "Manikganj": ["Sadar", "Singair", "Shibalaya", "Saturia", "Harirampur", "Gheor", "Daulatpur"], "Munshiganj": ["Sadar", "Gajaria", "Lohajang", "Sirajdikhan", "Sreenagar", "Tongibari"], "Tangail": ["Sadar", "Basail", "Bhuapur", "Delduar", "Ghatail", "Gopalpur", "Kalihati", "Madhupur", "Mirzapur", "Nagarpur", "Sakhipur"], "Kishoreganj": ["Sadar", "Bajitpur", "Bhairab", "Hossainpur", "Itna", "Karimganj", "Katiadi", "Kuliarchar", "Mithamain", "Nikli", "Pakundia", "Tarail"], "Faridpur": ["Sadar", "Alfadanga", "Bhanga", "Boalmari", "Charbhadrasan", "Madhukhali", "Nagarkanda", "Sadarpur"], "Rajbari": ["Sadar", "Baliakandi", "Goalandaghat", "Pangsha", "Kalukhali"], "Gopalganj": ["Sadar", "Kashiani", "Kotalipara", "Muksudpur", "Tungipara"], "Madaripur": ["Sadar", "Kalkini", "Rajoir", "Shibchar"], "Shariatpur": ["Sadar", "Bhedarganj", "Damudya", "Gosairhat", "Naria", "Zajira"] },
+            "Chattogram": { "Chattogram": ["Kotwali", "Panchlaish", "Pahartali", "Hathazari", "Sitakunda", "Patiya", "Anwara", "Boalkhali", "Chandanaish", "Fatikchhari", "Lohagara", "Mirsharai", "Rangunia", "Raozan", "Sandwip"], "Cox's Bazar": ["Sadar", "Chakaria", "Kutubdia", "Maheshkhali", "Ramu", "Teknaf", "Ukhia", "Pekua"], "Cumilla": ["Sadar", "Barura", "Brahmanpara", "Burichang", "Chandina", "Chauddagram", "Daudkandi", "Debidwar", "Homna", "Laksam", "Monohargonj", "Meghna", "Muradnagar", "Nangalkot", "Titas"], "Brahmanbaria": ["Sadar", "Ashuganj", "Bancharampur", "Bijoynagar", "Kasba", "Nabinagar", "Nasirnagar", "Sarail"], "Chandpur": ["Sadar", "Faridganj", "Hajiganj", "Haimchar", "Kachua", "Matlab Dakshin", "Matlab Uttar", "Shahrasti"], "Feni": ["Sadar", "Chhagalnaiya", "Daganbhuiyan", "Parshuram", "Fulgazi", "Sonagazi"], "Noakhali": ["Sadar", "Begumganj", "Chatkhil", "Companiganj", "Hatiya", "Senbagh", "Sonaimuri", "Subarnachar", "Kabirhat"], "Lakshmipur": ["Sadar", "Kamalnagar", "Raipur", "Ramganj", "Ramgati"], "Khagrachhari": ["Sadar", "Dighinala", "Lakshmichhari", "Mahalchhari", "Manikchhari", "Matiranga", "Panchhari", "Ramgarh"], "Rangamati": ["Sadar", "Bagaichhari", "Barkal", "Kawkhali", "Langadu", "Nanighar", "Rajasthali"], "Bandarban": ["Sadar", "Ali Kadam", "Lama", "Naikhongchhari", "Rowangchhari", "Ruma", "Thanchi"] },
+            "Rajshahi": { "Rajshahi": ["Boalia", "Rajpara", "Motihar", "Godagari", "Paba", "Bagha", "Bagmara", "Charghat", "Durgapur", "Mohanpur", "Tanore"], "Bogra": ["Sadar", "Adamdighi", "Dhunat", "Dhupchanchia", "Gabtali", "Kahaloo", "Nandigram", "Sariakandi", "Sherpur", "Shibganj", "Sonatola"], "Pabna": ["Sadar", "Atgharia", "Bera", "Bhangura", "Chatmohar", "Faridpur", "Ishwardi", "Santhia", "Sujanagar"], "Naogaon": ["Sadar", "Atrai", "Badalgachhi", "Dhamoirhat", "Manda", "Mahadevpur", "Niamatpur", "Patnitala", "Porsha", "Raninagar", "Sapahar"], "Joypurhat": ["Sadar", "Akkelpur", "Kalai", "Khetlal", "Panchbibi"], "Chapai Nawabganj": ["Sadar", "Bholahat", "Gomastapur", "Nachole", "Shibganj"], "Natore": ["Sadar", "Bagatipara", "Baraigram", "Gurudaspur", "Lalpur", "Singra"], "Sirajganj": ["Sadar", "Belkuchi", "Chauhali", "Kamarkhanda", "Kazipur", "Raiganj", "Shahjadpur", "Tarash", "Ullapara"] },
+            "Khulna": { "Khulna": ["Sadar", "Sonadanga", "Khalishpur", "Dumuria", "Batiaghata", "Dacope", "Dighalia", "Koyra", "Paikgachha", "Phultala", "Rupsha", "Terokhada"], "Jessore": ["Sadar", "Abhaynagar", "Bagherpara", "Chaugachha", "Jhikargacha", "Keshabpur", "Manirampur", "Sharsha"], "Bagerhat": ["Sadar", "Chitalmari", "Fakirhat", "Kachua", "Mollahat", "Mongla", "Morrelganj", "Rampal", "Sarankhola"], "Satkhira": ["Sadar", "Assasuni", "Debhata", "Kalaroa", "Kaliganj", "Shyamnagar", "Tala"], "Kushtia": ["Sadar", "Bheramara", "Daulatpur", "Khoksa", "Kumarkhali", "Mirpur"], "Magura": ["Sadar", "Mohammadpur", "Shalikha", "Sreepur"], "Meherpur": ["Sadar", "Gangni", "Mujibnagar"], "Narail": ["Sadar", "Kalia", "Lohagara"], "Chuadanga": ["Sadar", "Alamdanga", "Damurhuda", "Jibannagar"], "Jhenaidah": ["Sadar", "Harinakunda", "Kaliganj", "Kotchandpur", "Maheshpur", "Shailkupa"] },
+            "Barishal": { "Barishal": ["Sadar", "Agailjhara", "Babuganj", "Bakerganj", "Banaripara", "Gournadi", "Hizla", "Mehendigenj", "Muladi", "Wazirpur"], "Bhola": ["Sadar", "Burhanuddin", "Char Fasson", "Daulatkhan", "Lalmohan", "Manpura", "Tazumuddin"], "Patuakhali": ["Sadar", "Bauphal", "Dashmina", "Galachipa", "Kalapara", "Mirzaganj", "Rangabali"], "Pirojpur": ["Sadar", "Bhandaria", "Kawkhali", "Mathbaria", "Nazirpur", "Nesarabad", "Zianagar"], "Barguna": ["Sadar", "Amtali", "Bamna", "Betagi", "Patharghata", "Taltali"], "Jhalokati": ["Sadar", "Kathalia", "Nalchity", "Rajapur"] },
+            "Sylhet": { "Sylhet": ["Sadar", "Dakshin Surma", "Golapganj", "Bishwanath", "Beanibazar", "Balaganj", "Companiganj", "Fenchuganj", "Gowainghat", "Jaintiapur", "Kanaighat", "Zakiganj"], "Moulvibazar": ["Sadar", "Sreemangal", "Kulaura", "Barlekha", "Juri", "Kamalganj", "Rajnagar"], "Habiganj": ["Sadar", "Ajmiriganj", "Bahubal", "Baniyachong", "Chunarughat", "Lakhai", "Madhabpur", "Nabiganj", "Sayestaganj"], "Sunamganj": ["Sadar", "Bishwamvapur", "Chhatak", "Derai", "Dharamapasha", "Dowarabazar", "Jagannathpur", "Jamalganj", "Shantiganj", "Sullah", "Tahirpur"] },
+            "Rangpur": { "Rangpur": ["Sadar", "Mithapukur", "Pirganj", "Badarganj", "Gangachara", "Kaunia", "Pirgachha", "Taraganj"], "Dinajpur": ["Sadar", "Biral", "Birganj", "Bochaganj", "Chirirbandar", "Phulbari", "Ghoraghat", "Hakimpur", "Kaharole", "Khansama", "Nawabganj", "Parbatipur"], "Kurigram": ["Sadar", "Bhurungamari", "Chilmari", "Phulbari", "Nageshwari", "Rajarhat", "Rajibpur", "Ulipur"], "Gaibandha": ["Sadar", "Phulchhari", "Gobindaganj", "Palashbari", "Sadullapur", "Saghata", "Sundarganj"], "Lalmonirhat": ["Sadar", "Aditmari", "Hatibandha", "Kaliganj", "Patgram"], "Nilphamari": ["Sadar", "Dimla", "Domar", "Jaldhaka", "Kishoreganj", "Saidpur"], "Panchagarh": ["Sadar", "Atwari", "Boda", "Debiganj", "Tetulia"], "Thakurgaon": ["Sadar", "Baliadangi", "Haripur", "Pirganj", "Ranisankail"] },
+            "Mymensingh": { "Mymensingh": ["Sadar", "Muktagacha", "Bhaluka", "Trishal", "Dhobaura", "Fulbaria", "Gaffargaon", "Gauripur", "Haluaghat", "Ishwarganj", "Nandail", "Tara Khanda"], "Jamalpur": ["Sadar", "Bakshiganj", "Dewanganj", "Islampur", "Madarganj", "Melandaha", "Sarishabari"], "Netrokona": ["Sadar", "Atpara", "Barhatta", "Durgapur", "Khaliajuri", "Kalmakanda", "Kendua", "Madan", "Mohanganj", "Purbadhala"], "Sherpur": ["Sadar", "Jhenaigati", "Nakla", "Nalitabari", "Sreebardi"] }
+        };
+
+        const mockBloodBanks = [
+            { name: "Quantum Blood Lab", address: "Shantinagar, Dhaka", phone: "01711122233" },
+            { name: "Bangladesh Red Crescent", address: "Mohammadpur, Dhaka", phone: "01811223344" },
+            { name: "Sandhani (DMC Unit)", address: "Dhaka Medical College", phone: "01911223344" },
+            { name: "Police Blood Bank", address: "Rajarbagh, Dhaka", phone: "01511223344" },
+            { name: "Fatema Begum Blood Center", address: "Panchlaish, Chattogram", phone: "01722334455" },
+            { name: "Red Crescent Sylhet", address: "Zindabazar, Sylhet", phone: "01733445566" },
+            { name: "Sandhani (RMC)", address: "Rajshahi Medical College", phone: "01744556677" }
+        ];
+
+        window.showToast = (message, type = 'success') => {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? '<i class="fa-solid fa-check-circle text-green-500"></i>' : type === 'error' ? '<i class="fa-solid fa-circle-exclamation text-red-500"></i>' : '<i class="fa-solid fa-bell text-primary"></i>';
+            toast.className = `bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-2xl p-4 flex items-center gap-3 transform transition-all duration-300 translate-y-[-20px] opacity-0 z-50`;
+            toast.innerHTML = `<div class="text-xl">${icon}</div><div class="text-sm font-medium flex-1">${message}</div>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-[-20px]', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        };
+
+        window.openModal = (id) => {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            setTimeout(() => document.getElementById('modal-backdrop').classList.remove('opacity-0'), 10);
+            const modal = document.getElementById(id);
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.remove('translate-y-full'), 10);
+        };
+
+        window.closeModal = (id) => {
+            const modal = document.getElementById(id);
+            modal.classList.add('translate-y-full');
+            document.getElementById('modal-backdrop').classList.add('opacity-0');
+            setTimeout(() => { modal.style.display = 'none'; document.getElementById('modal-backdrop').classList.add('hidden'); }, 300);
+        };
+
+        window.switchTab = (tabId) => {
+            document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.dataset.target === `view-${tabId}`) btn.classList.add('active');
+            });
+            document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            if(tabId === 'banks' && document.getElementById('banks-list').children.length === 0) renderBloodBanks();
+            if(tabId === 'admin') renderAdminPanel();
+        };
+
+        window.toggleDarkMode = (isDark) => document.documentElement.classList.toggle('dark', isDark);
+
+        const renderBgGrid = (containerId, inputId) => {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            bloodGroups.forEach(bg => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `py-2 border rounded-xl text-sm font-bold transition-colors border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300`;
+                btn.innerText = bg;
+                btn.onclick = () => {
+                    Array.from(container.children).forEach(c => c.className = 'py-2 border rounded-xl text-sm font-bold transition-colors border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300');
+                    btn.className = 'py-2 border rounded-xl text-sm font-bold transition-colors border-primary bg-primary text-white';
+                    document.getElementById(inputId).value = bg;
+                };
+                container.appendChild(btn);
+            });
+        };
+
+        const setupGeoSelectors = (prefix) => {
+            const divSel = document.getElementById(`${prefix}-division`), distSel = document.getElementById(`${prefix}-district`), upaSel = document.getElementById(`${prefix}-upazila`);
+            
+            divSel.innerHTML = `<option value="">সকল বিভাগ</option>`;
+            Object.keys(geoData).sort().forEach(div => divSel.add(new Option(div, div)));
+            
+            divSel.addEventListener('change', (e) => {
+                distSel.innerHTML = '<option value="">সকল জেলা</option>'; upaSel.innerHTML = '<option value="">সকল উপজেলা/পৌরসভা</option>'; upaSel.disabled = true;
+                if(e.target.value) { 
+                    distSel.disabled = false; 
+                    Object.keys(geoData[e.target.value]).sort().forEach(dist => distSel.add(new Option(dist, dist))); 
+                }
+                else distSel.disabled = true;
+            });
+            
+            distSel.addEventListener('change', (e) => {
+                upaSel.innerHTML = '<option value="">সকল উপজেলা/পৌরসভা</option>';
+                if(e.target.value && divSel.value && geoData[divSel.value][e.target.value]) {
+                    upaSel.disabled = false; 
+                    geoData[divSel.value][e.target.value].sort().forEach(upa => upaSel.add(new Option(upa, upa)));
+                } else upaSel.disabled = true;
+            });
+        };
+
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (e) { 
+                console.log("Initialization standby...");
+            }
+        };
+
+        window.loginWithGoogle = async () => {
+            try {
+                const provider = new GoogleAuthProvider();
+                await signInWithPopup(auth, provider);
+                showToast("Google লগইন সফল হয়েছে!");
+            } catch(e) { showToast("লগইন বাতিল হয়েছে।", "error"); }
+        };
+
+        document.getElementById('notification-btn').addEventListener('click', () => {
+            const badge = document.getElementById('notif-badge');
+            if (!badge.classList.contains('hidden')) {
+                badge.classList.add('hidden');
+                if (latestNewRequestData) {
+                    const bagText = latestNewRequestData.bags ? `${latestNewRequestData.bags} ব্যাগ ` : '';
+                    const reasonText = latestNewRequestData.reason ? `(${latestNewRequestData.reason})` : '';
+                    showToast(`নতুন জরুরি রিকোয়েস্ট: ${bagText}${latestNewRequestData.bloodGroup} প্রয়োজন ${latestNewRequestData.hospital} এ! ${reasonText}`, 'info');
+                    switchTab('sos');
+                } else {
+                    showToast('কোনো নতুন নোটিফিকেশন নেই।');
+                }
+            } else {
+                showToast('কোনো নতুন নোটিফিকেশন নেই।');
+            }
+        });
+
+        const setupListeners = () => {
+            if (!currentUser) return;
+            if(unsubUsers) unsubUsers();
+            if(unsubRequests) unsubRequests();
+
+            if (currentUser.uid === ADMIN_UID) {
+                document.getElementById('nav-admin').classList.remove('hidden');
+            }
+
+            unsubUsers = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), (snapshot) => {
+                allUsers = [];
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    data.uid = docSnap.id; 
+                    allUsers.push(data);
+                    if(docSnap.id === currentUser.uid) {
+                        userProfile = data;
+                        updateProfileUI();
+                    }
+                });
+                
+                if(!userProfile) {
+                    userProfile = {
+                        name: currentUser.displayName || "গেস্ট ইউজার",
+                        photoURL: currentUser.photoURL || "",
+                        phone: "", bloodGroup: "", division: "", district: "", upazila: "",
+                        isAvailable: false, isVerified: false, points: 0, createdAt: serverTimestamp(),
+                        lastDonationDate: ""
+                    };
+                    setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), userProfile);
+                }
+
+                document.getElementById('stat-donors').innerText = allUsers.filter(u => u.isAvailable).length;
+                renderLeaderboard();
+                if (!document.getElementById('view-admin').classList.contains('hidden')) renderAdminPanel();
+            }, (err) => console.error(err));
+
+            unsubRequests = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'requests'), (snapshot) => {
+                allRequests = []; 
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data(); data.id = docSnap.id; allRequests.push(data);
+                });
+                
+                if (!isInitialReqLoad) {
+                    snapshot.docChanges().forEach((change) => {
+                        if (change.type === "added") {
+                            const newReq = change.doc.data();
+                            if(newReq.status === 'active') {
+                                document.getElementById('notif-badge').classList.remove('hidden');
+                                latestNewRequestData = newReq;
+                            }
+                        }
+                    });
+                }
+                isInitialReqLoad = false;
+
+                allRequests.sort((a, b) => (b.timestamp?.toMillis() || Date.now()) - (a.timestamp?.toMillis() || Date.now()));
+                document.getElementById('stat-sos').innerText = allRequests.filter(req => req.status === 'active').length;
+                updateTicker(); renderSOSList();
+            }, (err) => console.error(err));
+        };
+
+        const updateProfileUI = () => {
+            if(!userProfile) return;
+            document.getElementById('profile-name-display').innerText = userProfile.name || "গেস্ট ইউজার";
+            document.getElementById('profile-phone-display').innerText = userProfile.phone || "নম্বর সেট করা নেই";
+            
+            if(currentUser && !currentUser.isAnonymous) {
+                document.getElementById('btn-google-login').classList.add('hidden');
+                if(currentUser.photoURL) {
+                    document.getElementById('profile-img').src = currentUser.photoURL;
+                    document.getElementById('profile-img').classList.remove('hidden');
+                    document.getElementById('profile-default-icon').classList.add('hidden');
+                }
+            }
+
+            if(userProfile.bloodGroup) {
+                document.getElementById('profile-blood-badge').innerText = userProfile.bloodGroup;
+                document.getElementById('profile-blood-badge').classList.remove('hidden');
+                
+                document.getElementById('digital-donor-card').classList.remove('hidden');
+                const verifyBadge = userProfile.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-sm" title="Verified Donor"></i>' : '';
+                document.getElementById('card-name').innerHTML = `${userProfile.name || "গেস্ট ইউজার"} ${verifyBadge}`;
+                
+                document.getElementById('card-location').innerText = userProfile.district ? `${userProfile.upazila ? userProfile.upazila + ', ' : ''}${userProfile.district}` : "ঠিকানা আপডেট করুন";
+                document.getElementById('card-bg').innerText = userProfile.bloodGroup;
+                const badgeObj = getBadge(userProfile.points || 0);
+                const cardBadge = document.getElementById('card-badge');
+                cardBadge.innerText = badgeObj.name;
+                cardBadge.className = `text-xs font-bold px-2.5 py-1 rounded-full ${badgeObj.class}`;
+            } else {
+                document.getElementById('digital-donor-card').classList.add('hidden');
+            }
+
+            document.getElementById('profile-visibility').checked = userProfile.isAvailable;
+            document.getElementById('prof-name').value = userProfile.name || '';
+            document.getElementById('prof-phone').value = userProfile.phone || '';
+            document.getElementById('prof-last-donation').value = userProfile.lastDonationDate || '';
+            
+            document.getElementById('my-points-display').innerText = userProfile.points || 0;
+            const b = getBadge(userProfile.points || 0);
+            document.getElementById('my-badge-display').innerText = b.name;
+            document.getElementById('my-badge-display').className = `text-xs font-bold px-2 py-0.5 rounded-full ${b.class}`;
+        };
+
+        window.updateVisibility = async (isAvailable) => {
+            if(!userProfile?.bloodGroup || !userProfile?.phone || !userProfile?.division) {
+                showToast("আগে প্রোফাইল সম্পূর্ণ করুন।", "error"); 
+                document.getElementById('profile-visibility').checked = false;
+                setTimeout(()=>openModal('modal-edit-profile'), 500); 
+                return;
+            }
+            await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), { isAvailable });
+            showToast(isAvailable ? "আপনি এখন রক্তদাতা হিসেবে দৃশ্যমান।" : "আপনার প্রোফাইল এখন লুকানো হয়েছে।");
+        };
+
+        document.getElementById('form-edit-profile').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-profile'); const og = btn.innerHTML; btn.innerHTML = '<div class="loader w-5 h-5 border-2"></div>';
+            try {
+                const data = {
+                    name: document.getElementById('prof-name').value, 
+                    phone: document.getElementById('prof-phone').value,
+                    bloodGroup: document.getElementById('prof-bg-input').value, 
+                    division: document.getElementById('prof-division').value,
+                    district: document.getElementById('prof-district').value, 
+                    upazila: document.getElementById('prof-upazila').value,
+                    lastDonationDate: document.getElementById('prof-last-donation').value,
+                };
+                if(!data.bloodGroup) throw new Error("রক্তের গ্রুপ নির্বাচন করুন");
+                if(!data.division) throw new Error("বিভাগ নির্বাচন করুন");
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), data);
+                showToast("প্রোফাইল আপডেট হয়েছে!"); closeModal('modal-edit-profile');
+            } catch(er) { showToast(er.message, "error"); } finally { btn.innerHTML = og; }
+        });
+
+        window.performSearch = () => {
+            const bg = document.getElementById('search-bg-input').value;
+            const div = document.getElementById('search-division').value;
+            const dist = document.getElementById('search-district').value;
+            const upa = document.getElementById('search-upazila').value;
+            
+            if(!bg) { showToast("অনুগ্রহ করে রক্তের গ্রুপ নির্বাচন করুন।", "error"); return; }
+
+            const ninetyDaysMs = 90 * 24 * 60 * 60 * 1000;
+            const now = Date.now();
+
+            let res = allUsers.filter(u => {
+                if (!u.isAvailable || u.bloodGroup !== bg) return false;
+                if (u.lastDonationDate) {
+                    const lastDate = new Date(u.lastDonationDate).getTime();
+                    if ((now - lastDate) <= ninetyDaysMs) {
+                        return false; 
+                    }
+                }
+                return true;
+            });
+
+            if(div) res = res.filter(u => u.division === div);
+            if(dist) res = res.filter(u => u.district === dist);
+            if(upa) res = res.filter(u => u.upazila === upa);
+
+            const c = document.getElementById('search-results-container'), l = document.getElementById('search-results-list');
+            document.getElementById('search-count').innerText = `${res.length} জন`; 
+            l.innerHTML = '';
+            
+            if(res.length === 0) {
+                l.innerHTML = `<div class="text-center py-10 text-gray-500 text-sm bg-gray-50 dark:bg-gray-800 rounded-3xl border border-dashed border-gray-300 dark:border-gray-700">দুঃখিত, এই এলাকায় এই গ্রুপের কোনো রক্তদাতা পাওয়া যায়নি।</div>`;
+            } else {
+                res.forEach(u => {
+                    const b = getBadge(u.points || 0);
+                    const verifiedIcon = u.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-xs"></i>' : '';
+                    l.innerHTML += `
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-700 flex justify-between items-center animate-slide-up">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-rose-50 dark:bg-rose-900/30 rounded-full flex justify-center items-center text-primary font-bold text-lg border border-rose-100 dark:border-rose-800">${u.bloodGroup}</div>
+                                <div>
+                                    <h4 class="font-bold text-sm">${u.name} ${verifiedIcon} <span class="ml-1 text-[10px] px-1.5 py-0.5 rounded ${b.class}">${b.name}</span></h4>
+                                    <p class="text-[11px] text-gray-500"><i class="fa-solid fa-location-dot mr-1"></i>${u.upazila ? u.upazila + ', ' : ''}${u.district}</p>
+                                </div>
+                            </div>
+                            <button onclick="openRequestModal('${u.uid}', '${u.bloodGroup}')" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center shadow-lg active:scale-90 transition-transform"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>`;
+                });
+            }
+            c.classList.remove('hidden'); 
+            setTimeout(() => document.getElementById('main-content').scrollTo({ top: c.offsetTop - 20, behavior: 'smooth' }), 100);
+        };
+
+        window.openRequestModal = (donorUid, donorBg) => {
+            document.getElementById('req-donor-uid').value = donorUid;
+            document.getElementById('req-donor-bg').value = donorBg;
+            openModal('modal-request-donor');
+        };
+
+        document.getElementById('form-request-donor').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('patientName').value;
+            const bg = document.getElementById('req-donor-bg').value;
+            const bags = document.getElementById('bags').value;
+            const hospital = document.getElementById('hospital').value;
+            const phone = document.getElementById('requesterPhone').value;
+            const reason = document.getElementById('patientReason').value;
+            const time = document.getElementById('donationTime').value;
+            const donorUid = document.getElementById('req-donor-uid').value;
+
+            const message = `🩸 *রক্তের জন্য অনুরোধ (UID ভিত্তিক)*
+
+👤 রোগীর নাম: ${name}
+🩸 রক্তের গ্রুপ: ${bg}
+💉 পরিমাণ: ${bags} ব্যাগ
+🏥 হাসপাতাল: ${hospital}
+📞 যোগাযোগ: ${phone}
+⚠️ রোগের বিবরণ: ${reason}
+⏰ সময়সীমা: ${time}
+🆔 দাতার UID: ${donorUid}
+
+(অ্যাডমিন প্যানেল থেকে এই UID সার্চ করে ডোনারের সাথে যোগাযোগ করুন)`;
+
+            const adminWhatsAppNumber = "8801410603930";
+            const url = `https://wa.me/${adminWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(url, '_blank');
+            closeModal('modal-request-donor');
+            document.getElementById('form-request-donor').reset();
+            showToast('অনুরোধ পাঠানো হয়েছে। আমাদের অ্যাডমিন দ্রুত ব্যবস্থা নেবেন।');
+        });
+
+        window.shareApp = async () => {
+            const shareData = {
+                title: 'রক্তের টান',
+                text: '🩸 *রক্তের টান* — একটি জীবন বাঁচাতে, আমরা সবাই একসাথে। \nজরুরি প্রয়োজনে বিনামূল্যে রক্তদাতা খুঁজতে বা নিজে রক্তদাতা হিসেবে যুক্ত হতে আজই ভিজিট করুন আমাদের ওয়েবসাইট।\n🔗 লিংক:https://rokter-tan.vercel.app',
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    earnPoints(10, 'অ্যাপ শেয়ার করার জন্য');
+                } catch (err) {
+                    if (err.name !== 'AbortError') { console.error('Error sharing:', err); }
+                    showToast("শেয়ার ক্যানসেল করা হয়েছে।", "error");
+                }
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = shareData.text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast("লিংক কপি করা হয়েছে! বন্ধুদের সাথে শেয়ার করুন।");
+                    earnPoints(10, 'অ্যাপ শেয়ার করার জন্য');
+                } catch (err) { showToast("কপি করতে সমস্যা হয়েছে।", "error"); }
+                document.body.removeChild(textArea);
+            }
+        };
+
+        document.getElementById('form-add-sos').addEventListener('submit', async (e) => {
+            e.preventDefault(); const btn = document.getElementById('btn-submit-sos'); const og = btn.innerHTML; btn.innerHTML = '<div class="loader w-5 h-5 border-2 border-white"></div>';
+            try {
+                const data = {
+                    patient: document.getElementById('sos-patient').value, 
+                    reason: document.getElementById('sos-reason').value,
+                    bloodGroup: document.getElementById('sos-bg-input').value,
+                    bags: document.getElementById('sos-bags').value, 
+                    date: document.getElementById('sos-date').value,
+                    donationTime: document.getElementById('sos-time').value,
+                    hospital: document.getElementById('sos-hospital').value, 
+                    phone: document.getElementById('sos-phone').value,
+                    createdBy: currentUser.uid, 
+                    timestamp: serverTimestamp(), 
+                    status: 'active'
+                };
+                if(!data.bloodGroup) throw new Error("রক্তের গ্রুপ নির্বাচন করুন");
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'requests'), data);
+                showToast("পোস্ট করা হয়েছে!"); closeModal('modal-add-sos'); document.getElementById('form-add-sos').reset();
+                switchTab('sos'); earnPoints(5, "SOS পোস্ট করার জন্য");
+            } catch(er) { showToast(er.message, "error"); } finally { btn.innerHTML = og; }
+        });
+
+        const renderSOSList = () => {
+            const list = document.getElementById('sos-list'); list.innerHTML = '';
+            const todayLocal = new Date(); todayLocal.setHours(0, 0, 0, 0); 
+
+            const active = allRequests.filter(r => {
+                if(r.status !== 'active') return false;
+                if(r.date) { const reqDate = new Date(r.date); if(reqDate < todayLocal) return false; }
+                return true;
+            });
+
+            if(!active.length) { list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`; return; }
+            active.forEach(r => {
+                const time = r.timestamp?.toMillis ? new Date(r.timestamp.toMillis()).toLocaleTimeString('bn-BD', {hour:'2-digit', minute:'2-digit'}) : 'এখন';
+                const reasonUI = r.reason ? `<p><i class="fa-solid fa-notes-medical w-4"></i> <strong>সমস্যা:</strong> ${r.reason}</p>` : '';
+                const exactTimeUI = r.donationTime ? `<p><i class="fa-regular fa-clock w-4"></i> <strong>সময়:</strong> ${r.donationTime}</p>` : '';
+
+                list.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-rose-100 dark:border-rose-900/30 relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-primary text-white rounded-2xl flex justify-center items-center shadow-lg shadow-primary/30 font-bold text-lg">${r.bloodGroup}</div>
+                                <div><h3 class="font-bold text-sm">${r.patient}</h3><p class="text-[11px] text-gray-500">পোস্ট: ${time}</p></div>
+                            </div>
+                            <span class="bg-rose-100 text-primary dark:bg-rose-900/50 dark:text-rose-400 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse-slow">${r.bags} ব্যাগ</span>
+                        </div>
+                        <div class="space-y-1.5 mb-4 text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                            ${reasonUI}
+                            <p><i class="fa-regular fa-calendar w-4"></i> <strong>তারিখ:</strong> ${r.date}</p>
+                            ${exactTimeUI}
+                            <p><i class="fa-regular fa-hospital w-4"></i> <strong>স্থান:</strong> ${r.hospital}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="tel:${r.phone.replace(/[^0-9+]/g, '')}" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl text-center text-sm shadow-md flex justify-center items-center gap-2 transition-colors"><i class="fa-solid fa-phone"></i> কল করুন</a>
+                            ${r.createdBy === currentUser.uid ? `<button onclick="markSOSDone('${r.id}')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-bold py-2.5 rounded-xl text-sm transition-colors text-gray-700 dark:text-gray-300">সম্পন্ন হয়েছে</button>` : ''}
+                        </div>
+                    </div>`;
+            });
+        };
+
+        window.markSOSDone = async (reqId) => {
+            try { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'requests', reqId), { status: 'completed' }); showToast("সম্পন্ন মার্ক করা হয়েছে।"); earnPoints(20, "রক্ত ম্যানেজ করার জন্য"); } catch(e) {}
+        };
+
+        const updateTicker = () => {
+            const t = document.getElementById('sos-ticker'), a = allRequests.filter(r => r.status === 'active').slice(0, 5);
+            if(!a.length) { t.innerHTML = '<span class="mx-4"><i class="fa-solid fa-heart-pulse mr-1"></i> বর্তমানে কোনো জরুরি রক্তের প্রয়োজন নেই।</span>'; return; }
+            let h = ''; a.forEach(r => h += `<span class="mx-4 font-semibold"><i class="fa-solid fa-droplet animate-pulse-slow mr-1"></i> ${r.bloodGroup} প্রয়োজন ${r.hospital}-এ</span>   •   `);
+            t.innerHTML = h + h;
+        };
+
+        const getBadge = (p) => p >= 1000 ? {name:"Platinum",class:"badge-platinum",icon:"fa-gem"} : p >= 500 ? {name:"Gold",class:"badge-gold",icon:"fa-crown"} : p >= 100 ? {name:"Silver",class:"badge-silver",icon:"fa-star"} : {name:"Bronze",class:"badge-bronze",icon:"fa-medal"};
+        window.earnPoints = async (amt, rs) => { if(currentUser && userProfile) { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), { points: (userProfile.points || 0) + amt }); showToast(`${rs}: +${amt} পয়েন্ট!`); } };
+
+        const renderLeaderboard = () => {
+            const l = document.getElementById('leaderboard-list'); l.innerHTML = '';
+            const s = [...allUsers].sort((a, b) => (b.points || 0) - (a.points || 0)).slice(0, 20);
+            if(!s.length) { l.innerHTML = `<div class="p-4 text-center text-sm text-gray-500">কোনো তথ্য নেই।</div>`; return; }
+            s.forEach((u, i) => {
+                const b = getBadge(u.points || 0), me = u.uid === currentUser.uid;
+                const verifiedIcon = u.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-xs"></i>' : '';
+                l.innerHTML += `
+                    <div class="flex items-center justify-between p-3 border-b border-gray-50 dark:border-gray-700 last:border-0 ${me ? 'bg-rose-50 dark:bg-rose-900/20 rounded-2xl' : ''}">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${i<3 ? 'bg-yellow-100 text-yellow-600' : 'bg-gray-100 dark:bg-gray-700'}">${i + 1}</div>
+                            <div><div class="font-bold text-sm flex items-center gap-1.5">${u.name||'গেস্ট'} ${verifiedIcon} ${me ? '<span class="text-[10px] bg-primary text-white px-1.5 rounded ml-1">আপনি</span>':''}</div><div class="text-[11px] text-gray-500 mt-0.5"><i class="fa-solid ${b.icon} mr-1"></i>${b.name}</div></div>
+                        </div>
+                        <div class="font-bold text-primary">${u.points || 0} <span class="text-[10px] text-gray-400 font-normal">pts</span></div>
+                    </div>`;
+            });
+        };
+
+        const renderBloodBanks = () => {
+            const l = document.getElementById('banks-list'), q = document.getElementById('bank-search-input').value.toLowerCase(); l.innerHTML = '';
+            mockBloodBanks.filter(b => b.name.toLowerCase().includes(q) || b.address.toLowerCase().includes(q)).forEach(b => {
+                l.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                        <div><h4 class="font-bold text-sm">${b.name}</h4><p class="text-xs text-gray-500 mb-1"><i class="fa-solid fa-map-pin mr-1"></i>${b.address}</p><p class="text-xs font-semibold text-primary"><i class="fa-solid fa-phone-volume mr-1"></i>${b.phone}</p></div>
+                        <div class="flex flex-col gap-2">
+                             <a href="tel:${b.phone.replace(/[^0-9+]/g, '')}" class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex justify-center items-center"><i class="fa-solid fa-phone"></i></a>
+                             <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.name + ' ' + b.address)}" target="_blank" class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex justify-center items-center"><i class="fa-solid fa-location-arrow"></i></a>
+                        </div>
+                    </div>`;
+            });
+        };
+        document.getElementById('bank-search-input').addEventListener('input', renderBloodBanks);
+
+        const renderAdminPanel = () => {
+            const list = document.getElementById('admin-donors-list');
+            list.innerHTML = '';
+            const registeredUsers = allUsers.filter(u => u.phone).sort((a,b) => (b.points||0) - (a.points||0));
+            if(registeredUsers.length === 0) {
+                list.innerHTML = `<tr><td colspan="3" class="px-4 py-6 text-center text-gray-500 text-sm">কোনো ইউজার পাওয়া যায়নি</td></tr>`;
+                return;
+            }
+            registeredUsers.forEach(u => {
+                const isVerified = u.isVerified === true;
+                list.innerHTML += `
+                    <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 transition-colors">
+                        <td class="px-4 py-3">
+                            <div class="font-bold text-sm text-gray-900 dark:text-white truncate max-w-[120px]">${u.name || "N/A"}</div>
+                            <div class="text-[10px] text-gray-500">${u.phone}</div>
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            <span class="inline-block px-2 py-1 text-[10px] font-bold text-primary bg-rose-50 dark:bg-rose-900/30 rounded-md border border-rose-100 dark:border-rose-800">
+                                ${u.bloodGroup || "N/A"}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" ${isVerified ? 'checked' : ''} onchange="toggleAdminVerification('${u.uid}', this.checked)" class="sr-only peer admin-toggle">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                            </label>
+                        </td>
+                    </tr>
+                `;
+            });
+        };
+
+        window.toggleAdminVerification = async (uid, newStatus) => {
+            try {
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', uid), { isVerified: newStatus });
+                showToast(newStatus ? "ডোনার ভেরিফাইড করা হয়েছে।" : "ডোনারের ভেরিফিকেশন বাতিল করা হয়েছে।");
+            } catch(e) {
+                showToast("এরর: " + e.message, "error");
+                renderAdminPanel();
+            }
+        };
+
+        window.onload = () => {
+            renderBgGrid('search-bg-grid', 'search-bg-input'); 
+            renderBgGrid('sos-bg-grid', 'sos-bg-input'); 
+            renderBgGrid('prof-bg-grid', 'prof-bg-input');
+            setupGeoSelectors('search'); setupGeoSelectors('prof');
+            
+            const userLogoutBtn = document.getElementById('logout-btn-user');
+            const confirmLogoutBtn = document.getElementById('confirm-logout-btn');
+
+            if (userLogoutBtn) {
+                userLogoutBtn.addEventListener('click', () => {
+                    openModal('modal-logout-confirm');
+                });
+            }
+
+            if (confirmLogoutBtn) {
+                confirmLogoutBtn.addEventListener('click', async () => {
+                    try {
+                        const btn = confirmLogoutBtn;
+                        btn.innerHTML = '<div class="loader w-5 h-5 border-2 border-white mx-auto"></div>';
+                        await signOut(auth);
+                        window.location.href = "index.html";
+                    } catch (error) {
+                        showToast("লগ আউট করতে ব্যর্থ হয়েছেন।", "error");
+                        closeModal('modal-logout-confirm');
+                        confirmLogoutBtn.innerHTML = 'হ্যাঁ, লগ আউট';
+                    }
+                });
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) { currentUser = user; setupListeners(); }
+            });
+            initAuth();
+        };
+    </script>
+</body>
+</html>
