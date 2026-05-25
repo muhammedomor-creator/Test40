@@ -732,7 +732,16 @@
                 document.getElementById('profile-blood-badge').classList.remove('hidden');
                 
                 document.getElementById('digital-donor-card').classList.remove('hidden');
-                const verifyBadge = userProfile.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-sm" title="Verified Donor"></i>' : '';
+                
+                // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (প্রোফাইল কার্ডের জন্য)
+                const verifyBadge = userProfile.isVerified ? `
+<div style="display:inline-block; vertical-align:middle; margin-left:4px;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
+    <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
+  </svg>
+</div>` : '';
+
                 document.getElementById('card-name').innerHTML = `${userProfile.name || "গেস্ট ইউজার"} ${verifyBadge}`;
                 
                 document.getElementById('card-location').innerText = userProfile.district ? `${userProfile.upazila ? userProfile.upazila + ', ' : ''}${userProfile.district}` : "ঠিকানা আপডেট করুন";
@@ -822,7 +831,16 @@
             } else {
                 res.forEach(u => {
                     const b = getBadge(u.points || 0);
-                    const verifiedIcon = u.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-xs"></i>' : '';
+                    
+                    // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (সার্চ রেজাল্টের জন্য)
+                    const verifiedIcon = u.isVerified ? `
+<div style="display:inline-block; vertical-align:middle; margin-left:4px;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
+    <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
+  </svg>
+</div>` : '';
+
                     l.innerHTML += `
                         <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-700 flex justify-between items-center animate-slide-up">
                             <div class="flex items-center gap-3">
@@ -989,7 +1007,16 @@
             if(!s.length) { l.innerHTML = `<div class="p-4 text-center text-sm text-gray-500">কোনো তথ্য নেই।</div>`; return; }
             s.forEach((u, i) => {
                 const b = getBadge(u.points || 0), me = u.uid === currentUser.uid;
-                const verifiedIcon = u.isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1 text-xs"></i>' : '';
+                
+                // কাস্টম লাল-সাদা SVG ভেরিফাইড ব্যাচ (লিডারবোর্ডের জন্য)
+                const verifiedIcon = u.isVerified ? `
+<div style="display:inline-block; vertical-align:middle; margin-left:4px;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="anim-glow">
+    <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.152-.435.248-.9.248-1.4 0-2.21-1.79-4-4-4-.5 0-.965.1-1.4.248C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.152-.9-.248-1.4-.248-2.21 0-4 1.79-4 4 0 .5.1.965.248 1.4C1.475 9.55.6 10.92.6 12.5c0 1.58.875 2.95 2.148 3.6-.152.435-.248.9-.248 1.4 0 2.21 1.79 4 4 4 .5 0 .965-.1 1.4-.248.65 1.273 2.02 2.148 3.6 2.148 1.58 0 2.95-.875 3.6-2.148.435.152.9.248 1.4.248 2.21 0 4-1.79 4-4 0-.5-.1-.965-.248-1.4 1.273-.65 2.148-2.02 2.148-3.6z" fill="#FF0000"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86 15.17L6.69 12c-0.39-0.39-1.02-0.39-1.41 0c-0.39 0.39-0.39 1.02 0 1.41l3.88 3.88c0.39 0.39 1.02 0.39 1.41 0l7.78-7.78c0.39-0.39 0.39-1.02 0-1.41c-0.39-0.39-1.02-0.39-1.41 0L9.86 15.17z" fill="#ffffff"/>
+  </svg>
+</div>` : '';
+
                 l.innerHTML += `
                     <div class="flex items-center justify-between p-3 border-b border-gray-50 dark:border-gray-700 last:border-0 ${me ? 'bg-rose-50 dark:bg-rose-900/20 rounded-2xl' : ''}">
                         <div class="flex items-center gap-3">
