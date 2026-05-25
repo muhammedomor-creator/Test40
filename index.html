@@ -1052,47 +1052,6 @@ const renderSOSList = () => {
     });
 };
 
-
-            if(!active.length) { list.innerHTML = `<div class="text-center py-10 text-sm bg-white dark:bg-gray-800 rounded-3xl">কোনো জরুরি রক্তের প্রয়োজন নেই।</div>`; return; }
-            active.forEach(r => {
-                const time = r.timestamp?.toMillis ? new Date(r.timestamp.toMillis()).toLocaleTimeString('bn-BD', {hour:'2-digit', minute:'2-digit'}) : 'এখন';
-                const reasonUI = r.reason ? `<p><i class="fa-solid fa-notes-medical w-4"></i> <strong>সমস্যা:</strong> ${r.reason}</p>` : '';
-                const exactTimeUI = r.donationTime ? `<p><i class="fa-regular fa-clock w-4"></i> <strong>সময়:</strong> ${r.donationTime}</p>` : '';
-
-                list.innerHTML += `
-                    <div class="bg-white dark:bg-gray-800 p-4 rounded-3xl shadow-soft border border-rose-100 dark:border-rose-900/30 relative overflow-hidden">
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-primary text-white rounded-2xl flex justify-center items-center shadow-lg shadow-primary/30 font-bold text-lg">${r.bloodGroup}</div>
-                                <div><h3 class="font-bold text-sm">${r.patient}</h3><p class="text-[11px] text-gray-500">পোস্ট: ${time}</p></div>
-                            </div>
-                            <span class="bg-rose-100 text-primary dark:bg-rose-900/50 dark:text-rose-400 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse-slow">${r.bags} ব্যাগ</span>
-                        </div>
-                        <div class="space-y-1.5 mb-4 text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
-                            ${reasonUI}
-                            <p><i class="fa-regular fa-calendar w-4"></i> <strong>তারিখ:</strong> ${r.date}</p>
-                            ${exactTimeUI}
-                            <p><i class="fa-regular fa-hospital w-4"></i> <strong>স্থান:</strong> ${r.hospital}</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="tel:${r.phone.replace(/[^0-9+]/g, '')}" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl text-center text-sm shadow-md flex justify-center items-center gap-2 transition-colors"><i class="fa-solid fa-phone"></i> কল করুন</a>
-                            ${r.createdBy === currentUser.uid ? `<button onclick="markSOSDone('${r.id}')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-bold py-2.5 rounded-xl text-sm transition-colors text-gray-700 dark:text-gray-300">সম্পন্ন হয়েছে</button>` : ''}
-                        </div>
-                    </div>`;
-            });
-        };
-
-        window.markSOSDone = async (reqId) => {
-            try { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'requests', reqId), { status: 'completed' }); showToast("সম্পন্ন মার্ক করা হয়েছে।"); earnPoints(20, "রক্ত ম্যানেজ করার জন্য"); } catch(e) {}
-        };
-
-        const updateTicker = () => {
-            const t = document.getElementById('sos-ticker'), a = allRequests.filter(r => r.status === 'active').slice(0, 5);
-            if(!a.length) { t.innerHTML = '<span class="mx-4"><i class="fa-solid fa-heart-pulse mr-1"></i> বর্তমানে কোনো জরুরি রক্তের প্রয়োজন নেই।</span>'; return; }
-            let h = ''; a.forEach(r => h += `<span class="mx-4 font-semibold"><i class="fa-solid fa-droplet animate-pulse-slow mr-1"></i> ${r.bloodGroup} প্রয়োজন ${r.hospital}-এ</span>   •   `);
-            t.innerHTML = h + h;
-        };
-
         const getBadge = (p) => p >= 1000 ? {name:"Platinum",class:"badge-platinum",icon:"fa-gem"} : p >= 500 ? {name:"Gold",class:"badge-gold",icon:"fa-crown"} : p >= 100 ? {name:"Silver",class:"badge-silver",icon:"fa-star"} : {name:"Bronze",class:"badge-bronze",icon:"fa-medal"};
         window.earnPoints = async (amt, rs) => { if(currentUser && userProfile) { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), { points: (userProfile.points || 0) + amt }); showToast(`${rs}: +${amt} পয়েন্ট!`); } };
 
