@@ -1052,6 +1052,18 @@ const renderSOSList = () => {
     });
 };
 
+
+        window.markSOSDone = async (reqId) => {
+            try { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'requests', reqId), { status: 'completed' }); showToast("সম্পন্ন মার্ক করা হয়েছে।"); earnPoints(20, "রক্ত ম্যানেজ করার জন্য"); } catch(e) {}
+        };
+
+        const updateTicker = () => {
+            const t = document.getElementById('sos-ticker'), a = allRequests.filter(r => r.status === 'active').slice(0, 5);
+            if(!a.length) { t.innerHTML = '<span class="mx-4"><i class="fa-solid fa-heart-pulse mr-1"></i> বর্তমানে কোনো জরুরি রক্তের প্রয়োজন নেই।</span>'; return; }
+            let h = ''; a.forEach(r => h += `<span class="mx-4 font-semibold"><i class="fa-solid fa-droplet animate-pulse-slow mr-1"></i> ${r.bloodGroup} প্রয়োজন ${r.hospital}-এ</span>   •   `);
+            t.innerHTML = h + h;
+        };
+
         const getBadge = (p) => p >= 1000 ? {name:"Platinum",class:"badge-platinum",icon:"fa-gem"} : p >= 500 ? {name:"Gold",class:"badge-gold",icon:"fa-crown"} : p >= 100 ? {name:"Silver",class:"badge-silver",icon:"fa-star"} : {name:"Bronze",class:"badge-bronze",icon:"fa-medal"};
         window.earnPoints = async (amt, rs) => { if(currentUser && userProfile) { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid), { points: (userProfile.points || 0) + amt }); showToast(`${rs}: +${amt} পয়েন্ট!`); } };
 
